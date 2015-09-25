@@ -52,12 +52,16 @@ class Encrypt
   def same_row(coordinates)
     key = @newkey.key_table
     x1 = coordinates[0][0]; x2 = coordinates[1][0]; y1 = coordinates[0][1] + 1; y2 = coordinates[1][1] + 1
+    ## wrap round to left if it is the final value in row
+    y1 = 0 if y1 == 5; y2 = 0 if y2 == 5
     "#{key[x1][y1]}" + "#{key[x2][y2]}"
   end
 
   def same_col(coordinates)
     key = @newkey.key_table
     x1 = coordinates[0][0] + 1; x2 = coordinates[1][0] + 1; y1 = coordinates[0][1]; y2 = coordinates[1][1]
+    ## wrap round to top if it is the bottom value in column
+    x1 = 0 if x1 == 5; x2 = 0 if x2 == 5
     "#{key[x1][y1]}" + "#{key[x2][y2]}"
   end
 
